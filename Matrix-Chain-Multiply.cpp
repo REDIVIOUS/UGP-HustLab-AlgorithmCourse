@@ -13,18 +13,18 @@ void opt_generate(int p[N+1], int opt[N][N], int record[N][N]){
 		opt[i][i]=0; //对角线开销置0 
 	}
 	for(int i=0;i<N;i++){
-		record[i][i]=i; //每个元素开始时括号为自己 
+		record[i][i]=i; //每个元素开始时括号为自己（边界情况，链长为1的情况） 
 	} 
-	/*沿斜线方向更新最优解矩阵*/
-	for(int i=1;i<N;i++){  //i代表离斜对角线的距离 
-		for(int j=0;j<N-i;j++){ //j代表当前三角形开始点的纵坐标 
-			int z=j+i; //z代表长度为i时，三角形结束纵坐标 
-			opt[j][z]=INF; //初始值为无穷大 
+	/*构造最优解矩阵*/
+	for(int i=2;i<=N;i++){  //i代表当前所处理的矩阵链的长度 
+		for(int j=0;j<=N-i;j++){ //j代表当前链开始的横坐标 
+			int z=j+i-1; //z代表当前链结束的横坐标 
+			opt[j][z]=INF; //初始值为无穷大
 			for(int k=j;k<z;k++){ //选择断点k，寻找最优解 
 				int opt_t=opt[j][k]+opt[k+1][z]+p[j]*p[k+1]*p[z+1];
 				if(opt_t<opt[j][z]){
 					opt[j][z]=opt_t;
-					record[j][z]=k;	 //保存断点k 
+					record[j][z]=k;	 //保存断点k
 				} 
 			} 
 		} 
@@ -65,20 +65,21 @@ int main(){
 	p[N]=p0[N-1].second;
 	
 	opt_generate(p,opt,record);
-	for(int i=0;i<N;i++){
-		for(int j=0;j<N;j++){
-			cout<<opt[i][j]<<" ";
-		}
-		cout<<endl;
-	}
-	cout<<endl;
-	for(int i=0;i<N;++i){
-		for(int j=0;j<N;j++){
-			cout<<record[i][j]<<" "; 
-		}
-		cout<<endl; 
-	}
-	cout<<endl;
+//	for(int i=0;i<N;i++){
+//		for(int j=0;j<N;j++){
+//			cout<<opt[i][j]<<" ";
+//		}
+//		cout<<endl;
+//	}
+//	cout<<endl;
+//	for(int i=0;i<N;++i){
+//		for(int j=0;j<N;j++){
+//			cout<<record[i][j]<<" "; 
+//		}
+//		cout<<endl; 
+//	}
+//	cout<<endl;
+	cout<<"最少要进行的乘法步骤为："<<opt[0][N-1]<<"次"<<endl; 
 	print(record,0,N-1);
 	return 0;
 } 
