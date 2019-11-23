@@ -26,18 +26,12 @@ int main(){
 			if(w[i]>j){ //如果背包容量不够第i件商品，则一定不装入 
 				KNAP[i][j]=KNAP[i-1][j]; 
 			}
-			else{  //否则选择是否装第i件物品 
+			else{  //否则选择是否装第i件物品  
 			KNAP[i][j]=max(KNAP[i-1][j],KNAP[i-1][j-w[i]]+p[i]); 
 			} 
 		} 
 	} 
 
-	for(int i=1;i<=n;i++){ //打印整个动态规划表 
-		for(int j=0;j<=M;j++){
-			cout<<KNAP[i][j]<<" ";
-		} 
-		cout<<"\n";
-	} 
 	cout<<"背包能装入的最大价值为："<<KNAP[n][M]; 
 	return 0; 
 }

@@ -1,14 +1,14 @@
 #include <iostream>
 #include <utility>
 #define INF 100000
-#define N 6
 using namespace std;
 
-int opt[N][N], record[N][N]; //opt：最优解矩阵，record：用于记录括号位置
-pair<int, int> p0[N]; //记录每个矩阵的大小
-int p[N+1]; //存储矩阵大小序列
+int N;
+int opt[1000][1000], record[1000][1000]; //opt：最优解矩阵，record：用于记录括号位置
+pair<int, int> p0[1000]; //记录每个矩阵的大小
+int p[1000]; //存储矩阵大小序列
 
-void opt_generate(int p[N+1], int opt[N][N], int record[N][N]){
+void opt_generate(int p[1000], int opt[1000][1000], int record[1000][1000], int N){
 	for(int i=0;i<N;i++){
 		opt[i][i]=0; //对角线开销置0 
 	}
@@ -32,7 +32,7 @@ void opt_generate(int p[N+1], int opt[N][N], int record[N][N]){
 }
 
 //打印出括号序列 
-void print(int record[N][N], int i,int j){
+void print(int record[1000][1000], int i,int j){
 	if(i==j){
 		cout<<"A"<<i;
 	} 
@@ -44,7 +44,9 @@ void print(int record[N][N], int i,int j){
 	}
 }
 
+
 int main(){
+	cin>>N;
 	for(int i=0;i<N;i++){
 		cin>>p0[i].first;
 		cin>>p0[i].second;
@@ -53,7 +55,7 @@ int main(){
 	//如果输入不合法，汇报错误 
 	for(int i=1;i<N;i++){
 		if(p0[i].first!=p0[i-1].second){
-			cout<<"This matrix can not multiplication."<<endl;
+			cout<<"This matrix can not multiply."<<endl;
 			return 0;
 		}
 	} 
@@ -64,7 +66,7 @@ int main(){
 	}
 	p[N]=p0[N-1].second;
 	
-	opt_generate(p,opt,record);
+	opt_generate(p,opt,record,N);
 //	for(int i=0;i<N;i++){
 //		for(int j=0;j<N;j++){
 //			cout<<opt[i][j]<<" ";
@@ -83,4 +85,5 @@ int main(){
 	print(record,0,N-1);
 	return 0;
 } 
+
 

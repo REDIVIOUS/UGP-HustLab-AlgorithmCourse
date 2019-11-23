@@ -41,8 +41,8 @@ int unionroot(int i){
 } 
 
 int main(){
-	//读入边数、点数、边的信息 
-	cin>>m>>n;
+	//读入点数、边数、边的信息 
+	cin>>n>>m;
 	for(int i=0;i<m;i++){
 		cin>>E[i].u>>E[i].v>>E[i].w;
 	}
@@ -63,7 +63,7 @@ int main(){
 		cout<<"MST does not exist!"<<endl;
 	}
 	else{
-		cout<<"The minimal sum is: "<<sum<<endl;
+		cout<<"the minimum sum of weights is："<<sum<<endl;
 	}
 	return 0;
 }
