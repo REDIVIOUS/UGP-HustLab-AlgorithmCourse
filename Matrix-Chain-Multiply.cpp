@@ -67,20 +67,7 @@ int main(){
 	p[N]=p0[N-1].second;
 	
 	opt_generate(p,opt,record,N);
-//	for(int i=0;i<N;i++){
-//		for(int j=0;j<N;j++){
-//			cout<<opt[i][j]<<" ";
-//		}
-//		cout<<endl;
-//	}
-//	cout<<endl;
-//	for(int i=0;i<N;++i){
-//		for(int j=0;j<N;j++){
-//			cout<<record[i][j]<<" "; 
-//		}
-//		cout<<endl; 
-//	}
-//	cout<<endl;
+
 	cout<<"最少要进行的乘法步骤为："<<opt[0][N-1]<<"次"<<endl; 
 	print(record,0,N-1);
 	return 0;
